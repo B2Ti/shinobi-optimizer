@@ -1,0 +1,1578 @@
+{
+    "$type": "Assets.Scripts.Models.Profile.MapSaveDataModel, Assembly-CSharp",
+    "version": 7,
+    "round": 2,
+    "syncedObjectId": 3153004171,
+    "timeStep": 11025346,
+    "roundTimeStep": 5845905,
+    "matchWon": true,
+    "matchJustWon": false,
+    "gameVersion": "53.2",
+    "health": 1718.0,
+    "shield": 25.0,
+    "hasTakenLeakDamageLastRound": false,
+    "claimedFreeplayLoot": false,
+    "savedMapsId": "Logs",
+    "mapName": "Logs",
+    "mapDifficulty": "Easy",
+    "modeName": "Standard",
+    "gameType": 0,
+    "freeplayRoundSeed": 30324044,
+    "nextFreeAreaId": 537,
+    "loans": [],
+    "placedTowers": [
+        {
+            "$type": "Assets.Scripts.Models.Profile.TowerSaveDataModel, Assembly-CSharp",
+            "uniqueId": "15873-1MonkeyBuccaneer37531",
+            "damageDealt": 65070957337,
+            "cashEarned": 895160,
+            "worth": 494555.0,
+            "IdLastSave": 15873,
+            "createdAt": 37531,
+            "targetType": {
+                "$type": "Assets.Scripts.Models.Towers.TargetType, Assembly-CSharp",
+                "id": "Last",
+                "isActionable": false,
+                "actionOnCreate": false,
+                "intID": 1,
+                "continueToNextPriority": false
+            },
+            "position": { "x": -15.16231, "y": -11.4404736, "z": 0.0 },
+            "rotation": 0.0,
+            "baseId": "MonkeyBuccaneer",
+            "heroId": "",
+            "heroXpInCurrentLevel": 0.0,
+            "pathOneTier": 6,
+            "pathTwoTier": 0,
+            "pathThreeTier": 0,
+            "metaData": {
+                "$type": "System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[System.String, mscorlib]], mscorlib",
+                "ParagonInvestmentFromPops": "90000",
+                "ParagonInvestmentFromMoneySpent": "60000",
+                "ParagonInvestmentFromNonTier5": "10000",
+                "ParagonInvestmentFromTier5": "0",
+                "ParagonInvestmentFromBonus": "0",
+                "ParagonInvestmentTotal": "160000",
+                "ParagonActiveAt": "322837",
+                "MultiHookBlockEmissionUntil0": "5846310",
+                "MultiHookBlockEmissionUntil1": "5846310",
+                "MultiHookBlockEmissionUntil2": "5846310",
+                "MultiHookBlockEmissionUntil3": "5846310",
+                "MultiHookBlockEmissionUntil4": "5846310",
+                "MultiHookBlockEmissionUntil5": "5846310",
+                "MultiHookBlockEmissionUntil6": "5846310",
+                "MultiHookBlockEmissionUntil7": "5846310",
+                "MultiHookBlockEmissionUntil8": "5846310",
+                "MultiHookBlockEmissionUntil9": "5846310",
+                "AddMakeShiftAreaIDAddMakeshiftAreaModel_TowerPlatformfirst": "52",
+                "AddMakeShiftAreaIDAddMakeshiftAreaModel_TowerPlatformsecond": "53",
+                "Large BAD Harpoon": "0"
+            },
+            "owner": -1,
+            "originalOwner": -1,
+            "createdAtRoundTime": 32755,
+            "parentTowerId": 4294967295,
+            "areaPlacedOn": 6,
+            "isParagon": true,
+            "geraldoTowerId": null,
+            "isSuspended": false,
+            "isSellingBlocked": false,
+            "isSelectionBlocked": false,
+            "towerName": "MonkeyBuccaneer-Paragon",
+            "isNotUpgradeable": false,
+            "lockTargetTypeSwitching": false,
+            "path1NumBlockedTiers": -1,
+            "path2NumBlockedTiers": -1,
+            "path3NumBlockedTiers": -1,
+            "powerId": null,
+            "customMapTowerIndexId": -1,
+            "isSuspendedButNotScaled": false,
+            "frontierId": 0,
+            "createdOnRound": 0,
+            "livesGained": 0.0,
+            "pops": 100326
+        },
+        {
+            "$type": "Assets.Scripts.Models.Profile.TowerSaveDataModel, Assembly-CSharp",
+            "uniqueId": "271679281-1SuperMonkey3848657",
+            "damageDealt": 66517970834,
+            "cashEarned": 1390000,
+            "worth": 535515.0,
+            "IdLastSave": 271679281,
+            "createdAt": 3848657,
+            "targetType": {
+                "$type": "Assets.Scripts.Models.Towers.TargetType, Assembly-CSharp",
+                "id": "Strong",
+                "isActionable": false,
+                "actionOnCreate": false,
+                "intID": 3,
+                "continueToNextPriority": false
+            },
+            "position": { "x": -12.1862135, "y": 6.33652973, "z": 0.0 },
+            "rotation": 0.0,
+            "baseId": "SuperMonkey",
+            "heroId": "",
+            "heroXpInCurrentLevel": 0.0,
+            "pathOneTier": 5,
+            "pathTwoTier": 2,
+            "pathThreeTier": 0,
+            "metaData": {
+                "$type": "System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[System.String, mscorlib]], mscorlib",
+                "Temple_Magic": "51550",
+                "Temple_Military": "65745",
+                "Temple_Primary": "52830",
+                "TrueTemple_Magic": "51550",
+                "TrueTemple_Military": "65745",
+                "TrueTemple_Primary": "52705",
+                "TrueTemple_Support": "116820",
+                "DarkTemple": "true",
+                "SetCamoOn": "False"
+            },
+            "owner": -1,
+            "originalOwner": -1,
+            "createdAtRoundTime": 3526614,
+            "parentTowerId": 4294967295,
+            "areaPlacedOn": 6,
+            "isParagon": false,
+            "geraldoTowerId": null,
+            "isSuspended": false,
+            "isSellingBlocked": false,
+            "isSelectionBlocked": false,
+            "towerName": "SuperMonkey-520",
+            "isNotUpgradeable": false,
+            "lockTargetTypeSwitching": false,
+            "path1NumBlockedTiers": -1,
+            "path2NumBlockedTiers": -1,
+            "path3NumBlockedTiers": -1,
+            "powerId": null,
+            "customMapTowerIndexId": -1,
+            "isSuspendedButNotScaled": false,
+            "frontierId": 0,
+            "createdOnRound": 0,
+            "livesGained": 0.0,
+            "pops": 70230
+        }
+    ],
+    "powerPlaceHistory": [
+        {
+            "$type": "Assets.Scripts.Models.Profile.PowerSaveDataModel, Assembly-CSharp",
+            "powerId": "BananaFarmer",
+            "owner": -1
+        },
+        {
+            "$type": "Assets.Scripts.Models.Profile.PowerSaveDataModel, Assembly-CSharp",
+            "powerId": "TechBot",
+            "owner": -1
+        }
+    ],
+    "propsRequiringSaveData": [],
+    "roundRemoveableSaveData": [],
+    "placedProjectiles": [
+        {
+            "$type": "Assets.Scripts.Models.Profile.ProjectileSaveDataModel, Assembly-CSharp",
+            "pierce": 124.0,
+            "baseId": "ProjectileModel_Fallout",
+            "position": { "x": 77.3, "y": 52.5478745, "z": 2.0 },
+            "rotation": 0.0,
+            "metaData": {
+                "$type": "System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[System.String, mscorlib]], mscorlib",
+                "createdAt": "5845362",
+                "roundsLeft": "9999998",
+                "saveId": "Fallout"
+            },
+            "owner": -1,
+            "emittedByTowerId": 271679495,
+            "emittedFrom": { "x": 77.3, "y": 52.5478745, "z": 2.0 },
+            "isPowerProjectile": false,
+            "powerId": null,
+            "createdAt": 11023927
+        },
+        {
+            "$type": "Assets.Scripts.Models.Profile.ProjectileSaveDataModel, Assembly-CSharp",
+            "pierce": 124.0,
+            "baseId": "ProjectileModel_Fallout",
+            "position": { "x": 21.5660324, "y": 42.5038, "z": 2.0 },
+            "rotation": 0.0,
+            "metaData": {
+                "$type": "System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[System.String, mscorlib]], mscorlib",
+                "createdAt": "5845362",
+                "roundsLeft": "9999998",
+                "saveId": "Fallout"
+            },
+            "owner": -1,
+            "emittedByTowerId": 271679495,
+            "emittedFrom": { "x": 21.5660324, "y": 42.5038, "z": 2.0 },
+            "isPowerProjectile": false,
+            "powerId": null,
+            "createdAt": 11023927
+        }
+    ],
+    "bloons": [],
+    "activeRemoveablesByName": [],
+    "gizmoSaveData": [],
+    "mapEventSaveData": {
+        "$type": "System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[Assets.Scripts.Models.Profile.MapEventSaveData, Assembly-CSharp]], mscorlib"
+    },
+    "towerDiscounts": [],
+    "players": {
+        "$type": "System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib],[Assets.Scripts.Models.Profile.PlayerSaveData, Assembly-CSharp]], mscorlib",
+        "-1": {
+            "$type": "Assets.Scripts.Models.Profile.PlayerSaveData, Assembly-CSharp",
+            "index": -1,
+            "cash": 118901285.13364589,
+            "hero": "Ezili",
+            "freeTowers": [
+                {
+                    "$type": "Assets.Scripts.Models.Profile.FreeTowerSaveDataModel, Assembly-CSharp",
+                    "baseTowerID": "DartMonkey",
+                    "charges": 536,
+                    "mutuallyExclusiveWith": "",
+                    "priority": 0
+                },
+                {
+                    "$type": "Assets.Scripts.Models.Profile.FreeTowerSaveDataModel, Assembly-CSharp",
+                    "baseTowerID": "DartMonkey",
+                    "charges": 0,
+                    "mutuallyExclusiveWith": "GlueGunner",
+                    "priority": -1
+                },
+                {
+                    "$type": "Assets.Scripts.Models.Profile.FreeTowerSaveDataModel, Assembly-CSharp",
+                    "baseTowerID": "GlueGunner",
+                    "charges": 0,
+                    "mutuallyExclusiveWith": "DartMonkey",
+                    "priority": -1
+                }
+            ],
+            "towerDiscounts": [
+                {
+                    "$type": "Assets.Scripts.Models.Profile.TowerDiscountSaveDataModel, Assembly-CSharp",
+                    "discountName": "SimTowerDiscountModel_CheapRangs",
+                    "charges": 999949,
+                    "towers": ["BoomerangMonkey"],
+                    "multiplier": 0.0,
+                    "subtraction": 50.0
+                },
+                {
+                    "$type": "Assets.Scripts.Models.Profile.TowerDiscountSaveDataModel, Assembly-CSharp",
+                    "discountName": "SimTowerDiscountModel_MilitaryConscription",
+                    "charges": 0,
+                    "towers": [
+                        "SniperMonkey",
+                        "MonkeySub",
+                        "MonkeyBuccaneer",
+                        "MonkeyAce",
+                        "HeliPilot",
+                        "MortarMonkey",
+                        "DartlingGunner"
+                    ],
+                    "multiplier": 0.33,
+                    "subtraction": 0.0
+                },
+                {
+                    "$type": "Assets.Scripts.Models.Profile.TowerDiscountSaveDataModel, Assembly-CSharp",
+                    "discountName": "SimTowerDiscountModel_AdvancedLogistics",
+                    "charges": 999888,
+                    "towers": [
+                        "SniperMonkey",
+                        "MonkeySub",
+                        "MonkeyBuccaneer",
+                        "MonkeyAce",
+                        "HeliPilot",
+                        "MortarMonkey",
+                        "DartlingGunner"
+                    ],
+                    "multiplier": 0.05,
+                    "subtraction": 0.0
+                },
+                {
+                    "$type": "Assets.Scripts.Models.Profile.TowerDiscountSaveDataModel, Assembly-CSharp",
+                    "discountName": "SimTowerDiscountModel_FlatPackBuildings",
+                    "charges": 9999613,
+                    "towers": ["BananaFarm", "MonkeyAcademy", "MonkeyVillage"],
+                    "multiplier": 0.02,
+                    "subtraction": 0.0
+                },
+                {
+                    "$type": "Assets.Scripts.Models.Profile.TowerDiscountSaveDataModel, Assembly-CSharp",
+                    "discountName": "SimTowerDiscountModel_FirstLastLineOfDefense",
+                    "charges": 0,
+                    "towers": ["SpikeFactory"],
+                    "multiplier": 0.0,
+                    "subtraction": 150.0
+                },
+                {
+                    "$type": "Assets.Scripts.Models.Profile.TowerDiscountSaveDataModel, Assembly-CSharp",
+                    "discountName": "SimTowerDiscountModel_FarmSubsidy",
+                    "charges": 0,
+                    "towers": ["BananaFarm"],
+                    "multiplier": 0.0,
+                    "subtraction": 100.0
+                },
+                {
+                    "$type": "Assets.Scripts.Models.Profile.TowerDiscountSaveDataModel, Assembly-CSharp",
+                    "discountName": "SimTowerDiscountModel_HeroFavors",
+                    "charges": 9999983,
+                    "towers": [
+                        "Quincy",
+                        "Gwendolin",
+                        "StrikerJones",
+                        "ObynGreenfoot",
+                        "CaptainChurchill",
+                        "Benjamin",
+                        "Ezili",
+                        "PatFusty",
+                        "Adora",
+                        "AdmiralBrickell",
+                        "Etienne",
+                        "Sauda",
+                        "Psi",
+                        "Geraldo",
+                        "Corvus",
+                        "Rosalia",
+                        "Silas"
+                    ],
+                    "multiplier": 0.1,
+                    "subtraction": 0.0
+                }
+            ],
+            "geraldoShopItems": [
+                {
+                    "$type": "Assets.Scripts.Simulation.Input.GeraldoShopInventory+GeraldoStockItem, Assembly-CSharp",
+                    "name": "ShootyTurret",
+                    "used": 0,
+                    "remaining": 2,
+                    "replenishingFromRound": -1,
+                    "roundUnlockedAt": -1
+                },
+                {
+                    "$type": "Assets.Scripts.Simulation.Input.GeraldoShopInventory+GeraldoStockItem, Assembly-CSharp",
+                    "name": "StackOfOldNails",
+                    "used": 0,
+                    "remaining": 4,
+                    "replenishingFromRound": -1,
+                    "roundUnlockedAt": -1
+                },
+                {
+                    "$type": "Assets.Scripts.Simulation.Input.GeraldoShopInventory+GeraldoStockItem, Assembly-CSharp",
+                    "name": "CreepyIdol",
+                    "used": 0,
+                    "remaining": 1,
+                    "replenishingFromRound": -1,
+                    "roundUnlockedAt": -1
+                },
+                {
+                    "$type": "Assets.Scripts.Simulation.Input.GeraldoShopInventory+GeraldoStockItem, Assembly-CSharp",
+                    "name": "JarOfPickles",
+                    "used": 0,
+                    "remaining": 2,
+                    "replenishingFromRound": -1,
+                    "roundUnlockedAt": -1
+                },
+                {
+                    "$type": "Assets.Scripts.Simulation.Input.GeraldoShopInventory+GeraldoStockItem, Assembly-CSharp",
+                    "name": "RareQuincyActionFigure",
+                    "used": 0,
+                    "remaining": 1,
+                    "replenishingFromRound": -1,
+                    "roundUnlockedAt": -1
+                },
+                {
+                    "$type": "Assets.Scripts.Simulation.Input.GeraldoShopInventory+GeraldoStockItem, Assembly-CSharp",
+                    "name": "SeeInvisibilityPotion",
+                    "used": 0,
+                    "remaining": 1,
+                    "replenishingFromRound": -1,
+                    "roundUnlockedAt": -1
+                },
+                {
+                    "$type": "Assets.Scripts.Simulation.Input.GeraldoShopInventory+GeraldoStockItem, Assembly-CSharp",
+                    "name": "TubeOfAmazoGlue",
+                    "used": 0,
+                    "remaining": 2,
+                    "replenishingFromRound": -1,
+                    "roundUnlockedAt": -1
+                },
+                {
+                    "$type": "Assets.Scripts.Simulation.Input.GeraldoShopInventory+GeraldoStockItem, Assembly-CSharp",
+                    "name": "SharpeningStone",
+                    "used": 0,
+                    "remaining": 1,
+                    "replenishingFromRound": -1,
+                    "roundUnlockedAt": -1
+                },
+                {
+                    "$type": "Assets.Scripts.Simulation.Input.GeraldoShopInventory+GeraldoStockItem, Assembly-CSharp",
+                    "name": "WornHerosCape",
+                    "used": 0,
+                    "remaining": 1,
+                    "replenishingFromRound": -1,
+                    "roundUnlockedAt": -1
+                },
+                {
+                    "$type": "Assets.Scripts.Simulation.Input.GeraldoShopInventory+GeraldoStockItem, Assembly-CSharp",
+                    "name": "BladeTrap",
+                    "used": 0,
+                    "remaining": 1,
+                    "replenishingFromRound": -1,
+                    "roundUnlockedAt": -1
+                },
+                {
+                    "$type": "Assets.Scripts.Simulation.Input.GeraldoShopInventory+GeraldoStockItem, Assembly-CSharp",
+                    "name": "BottleHotSauce",
+                    "used": 0,
+                    "remaining": 2,
+                    "replenishingFromRound": -1,
+                    "roundUnlockedAt": -1
+                },
+                {
+                    "$type": "Assets.Scripts.Simulation.Input.GeraldoShopInventory+GeraldoStockItem, Assembly-CSharp",
+                    "name": "Fertilizer",
+                    "used": 0,
+                    "remaining": 1,
+                    "replenishingFromRound": -1,
+                    "roundUnlockedAt": -1
+                },
+                {
+                    "$type": "Assets.Scripts.Simulation.Input.GeraldoShopInventory+GeraldoStockItem, Assembly-CSharp",
+                    "name": "PetRabbit",
+                    "used": 0,
+                    "remaining": 1,
+                    "replenishingFromRound": -1,
+                    "roundUnlockedAt": -1
+                },
+                {
+                    "$type": "Assets.Scripts.Simulation.Input.GeraldoShopInventory+GeraldoStockItem, Assembly-CSharp",
+                    "name": "RejuvPotion",
+                    "used": 0,
+                    "remaining": 1,
+                    "replenishingFromRound": -1,
+                    "roundUnlockedAt": -1
+                },
+                {
+                    "$type": "Assets.Scripts.Simulation.Input.GeraldoShopInventory+GeraldoStockItem, Assembly-CSharp",
+                    "name": "GenieBottle",
+                    "used": 0,
+                    "remaining": 1,
+                    "replenishingFromRound": -1,
+                    "roundUnlockedAt": -1
+                },
+                {
+                    "$type": "Assets.Scripts.Simulation.Input.GeraldoShopInventory+GeraldoStockItem, Assembly-CSharp",
+                    "name": "ParagonPowerTotem",
+                    "used": 0,
+                    "remaining": 1,
+                    "replenishingFromRound": -1,
+                    "roundUnlockedAt": -1
+                }
+            ],
+            "lvl20GeraldoRestockApplied": false,
+            "hasPlacedHero": false
+        }
+    },
+    "towerTypeMaxPlacedHistory": {
+        "$type": "System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[Assets.Scripts.Models.Profile.TowerMaxCountPlacedHistory, Assembly-CSharp]], mscorlib"
+    },
+    "towerHistory": [
+        {
+            "$type": "Assets.Scripts.Models.Profile.TowerHistory, Assembly-CSharp",
+            "uniqueId": "234-1DartMonkey188",
+            "baseId": "DartMonkey",
+            "towerSet": 1,
+            "tiers": [0, 0, 0],
+            "cost": 0.0,
+            "destroyed": true,
+            "tiersModifier": 0
+        },
+        {
+            "$type": "Assets.Scripts.Models.Profile.TowerHistory, Assembly-CSharp",
+            "uniqueId": "448-1BananaFarm3028",
+            "baseId": "BananaFarm",
+            "towerSet": 8,
+            "tiers": [2, 3, 0],
+            "cost": 5915.0,
+            "destroyed": true,
+            "tiersModifier": 0
+        }
+    ],
+    "towerMaxBaseIdAtATime": {
+        "$type": "System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[System.Int32, mscorlib]], mscorlib",
+        "Alchemist": 2,
+        "BananaFarm": 36,
+        "BeastHandler": 7,
+        "BombShooter": 3,
+        "BoomerangMonkey": 20,
+        "DartMonkey": 1,
+        "DartlingGunner": 2,
+        "Desperado": 2,
+        "Druid": 1,
+        "EngineerMonkey": 48,
+        "Ezili": 1,
+        "GlueGunner": 1,
+        "HeliPilot": 1,
+        "IceMonkey": 5,
+        "Mermonkey": 2,
+        "MonkeyAce": 21,
+        "MonkeyBuccaneer": 2,
+        "MonkeySub": 30,
+        "MonkeyVillage": 6,
+        "NinjaMonkey": 143,
+        "SniperMonkey": 15,
+        "SpikeFactory": 20,
+        "SuperMonkey": 21,
+        "TackShooter": 20,
+        "WizardMonkey": 20
+    },
+    "activeMutators": {
+        "$type": "System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[System.Collections.Generic.List`1[[Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp]], mscorlib]], mscorlib",
+        "Overclock": [
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 271679281,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 346937878,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 346937913,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 346939103,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 346939135,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "Overclock4",
+                "towerId": 346939162,
+                "framesLeft": 49,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "Overclock4",
+                "towerId": 346940023,
+                "framesLeft": 2134,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 349954521,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 349954556,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "Overclock4",
+                "towerId": 349954704,
+                "framesLeft": 113,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "Overclock4",
+                "towerId": 349955419,
+                "framesLeft": 62,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "Overclock4",
+                "towerId": 358742724,
+                "framesLeft": 1548,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "Overclock4",
+                "towerId": 358743673,
+                "framesLeft": 2078,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "Overclock4",
+                "towerId": 358744550,
+                "framesLeft": 2063,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "Overclock4",
+                "towerId": 362796384,
+                "framesLeft": 1968,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "Overclock5",
+                "towerId": 375833701,
+                "framesLeft": 1742,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "Overclock4",
+                "towerId": 375834208,
+                "framesLeft": 425,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "Overclock4",
+                "towerId": 375834277,
+                "framesLeft": 943,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "Overclock4",
+                "towerId": 375834790,
+                "framesLeft": 859,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "Overclock4",
+                "towerId": 375834882,
+                "framesLeft": 182,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "Overclock4",
+                "towerId": 375834951,
+                "framesLeft": 48,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 375834974,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 375834997,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "Overclock4",
+                "towerId": 375835215,
+                "framesLeft": 1460,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 375835282,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "Overclock4",
+                "towerId": 375835415,
+                "framesLeft": 680,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "Overclock4",
+                "towerId": 375835438,
+                "framesLeft": 691,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "Overclock4",
+                "towerId": 375835671,
+                "framesLeft": 715,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "Overclock4",
+                "towerId": 375835717,
+                "framesLeft": 791,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "Overclock4",
+                "towerId": 377678556,
+                "framesLeft": 1160,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "Overclock4",
+                "towerId": 377678711,
+                "framesLeft": 1993,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "Overclock4",
+                "towerId": 377680075,
+                "framesLeft": 1981,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "Overclock4",
+                "towerId": 377684964,
+                "framesLeft": 2013,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "Overclock4",
+                "towerId": 377686947,
+                "framesLeft": 2037,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "Overclock4",
+                "towerId": 377689226,
+                "framesLeft": 2091,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "Overclock4",
+                "towerId": 381438826,
+                "framesLeft": 75,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "Overclock4",
+                "towerId": 381441401,
+                "framesLeft": 143,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "Overclock4",
+                "towerId": 384674216,
+                "framesLeft": 2051,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "Overclock4",
+                "towerId": 384677721,
+                "framesLeft": 10,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "Overclock4",
+                "towerId": 385760562,
+                "framesLeft": 130,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "Overclock4",
+                "towerId": 385761891,
+                "framesLeft": 96,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "Overclock4",
+                "towerId": 385765134,
+                "framesLeft": 1782,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "Overclock4",
+                "towerId": 385765157,
+                "framesLeft": 1782,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "Overclock4",
+                "towerId": 385765272,
+                "framesLeft": 1606,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "Overclock4",
+                "towerId": 385765318,
+                "framesLeft": 1078,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 397295523,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 397297020,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 397315182,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 397341064,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 1631560128,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 2072416937,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 3116030474,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 3116030500,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 3120563166,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 3120563192,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 3121033435,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 3121239801,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 3121356029,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 3121564205,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 3122130220,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 3122140579,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 3122927854,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 3123011401,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 3123279773,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 3123861257,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 3124067412,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 3124392181,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 3124414516,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 3124997613,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 3125225823,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 3125302062,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 3125735534,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 3126164619,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 3126450595,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 3127009487,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 3127053440,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 3127272094,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 3127562089,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 3127807179,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 3128048918,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 3128603790,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 3128741093,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 3129133936,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 3129443632,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 3129569067,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 3130234972,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 3130280271,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 3131008260,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 3131069996,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 3131349718,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 3131651029,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 3131958794,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 3132344321,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 3132769731,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 3133243767,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 3133416242,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 3133922200,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 3134173895,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 3134249962,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 3134249988,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 3134476105,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 3134874591,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 3134972266,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 3135459142,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 3135517540,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 3136028495,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 3136166600,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 3136772557,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 3137277602,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "OverclockParagon",
+                "towerId": 3137281725,
+                "framesLeft": 334,
+                "counter": 0,
+                "roundsLeft": 0
+            }
+        ],
+        "Ultraboost": [
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "Ultraboost",
+                "towerId": 271679281,
+                "framesLeft": -1,
+                "counter": 10,
+                "roundsLeft": -1
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "Ultraboost",
+                "towerId": 346939162,
+                "framesLeft": -1,
+                "counter": 10,
+                "roundsLeft": -1
+            }
+        ],
+        "TakeAim": [
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "TakeAim",
+                "towerId": 271679281,
+                "framesLeft": 900,
+                "counter": 4,
+                "roundsLeft": -1
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "TakeAim",
+                "towerId": 346937878,
+                "framesLeft": 900,
+                "counter": 4,
+                "roundsLeft": -1
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "TakeAim",
+                "towerId": 346937913,
+                "framesLeft": 900,
+                "counter": 4,
+                "roundsLeft": -1
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "TakeAim",
+                "towerId": 346939103,
+                "framesLeft": 900,
+                "counter": 4,
+                "roundsLeft": -1
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "TakeAim",
+                "towerId": 346939135,
+                "framesLeft": 900,
+                "counter": 4,
+                "roundsLeft": -1
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "TakeAim",
+                "towerId": 375835215,
+                "framesLeft": 900,
+                "counter": 5,
+                "roundsLeft": -1
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "TakeAim",
+                "towerId": 397295523,
+                "framesLeft": 900,
+                "counter": 4,
+                "roundsLeft": -1
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "TakeAim",
+                "towerId": 3116030474,
+                "framesLeft": 900,
+                "counter": 4,
+                "roundsLeft": -1
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "TakeAim",
+                "towerId": 3116030500,
+                "framesLeft": 900,
+                "counter": 4,
+                "roundsLeft": -1
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "TakeAim",
+                "towerId": 3120563166,
+                "framesLeft": 900,
+                "counter": 4,
+                "roundsLeft": -1
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "TakeAim",
+                "towerId": 3120563192,
+                "framesLeft": 900,
+                "counter": 4,
+                "roundsLeft": -1
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "TakeAim",
+                "towerId": 3134249962,
+                "framesLeft": 900,
+                "counter": 4,
+                "roundsLeft": -1
+            },
+            {
+                "$type": "Assets.Scripts.Models.Profile.MutatorSaveDataModel, Assembly-CSharp",
+                "mutatorSaveId": "TakeAim",
+                "towerId": 3134249988,
+                "framesLeft": 900,
+                "counter": 4,
+                "roundsLeft": -1
+            }
+        ]
+    },
+    "emergencyUnlockActivatedAt": {
+        "$type": "System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib],[System.Int32, mscorlib]], mscorlib"
+    },
+    "goldenBloonsPopped": 0,
+    "gameId": 20489,
+    "attemptId": 188,
+    "continuesUsed": 0,
+    "metaData": {
+        "$type": "System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[System.String, mscorlib]], mscorlib",
+        "SharedAbilityCooldowns": "[Legend of the Night,0]",
+        "CorvusMetaData_Attunement_isActive-1": "False",
+        "CorvusMetaData_Attunement_maxSpeed-1": "1",
+        "CorvusMetaData_Attunement_maxDamage-1": "1",
+        "CorvusMetaData_Mana_availableMana-1": "800",
+        "CorvusMetaData_Recovery_isRecovering-1": "False",
+        "CorvusMetaData_Recovery_recoveryFramesActive-1": "0",
+        "CorvusMetaData_SoulBarrier_soulBarrierLivesAbsorbed-1": "-1",
+        "CorvusMetaData_SoulBarrier_soulBarrierMaxLivesAbsorbed-1": "-1",
+        "CorvusMetaData_Spells_activeContinuousSpells-1": "",
+        "CorvusMetaData_Spells_activeInstantSpells-1": "",
+        "CorvusMetaData_Spells_instantSpellsOnCooldown-1": "",
+        "CorvusMetaData_TimedEvents_spiritAbsorptionState-1": "Released",
+        "CorvusMetaData_TimedEvents_frameToAbsorbOn-1": "-1",
+        "PowersInShop-RoadSpikes": "0",
+        "PowersInShop-MoabMine": "0",
+        "PowersInShop-GlueTrap": "0",
+        "PowersInShop-CamoTrap": "0"
+    },
+    "cashSpent": 47880623.108886719,
+    "tileId": -1,
+    "ts": null,
+    "activeRegenRemovablesByName": [],
+    "playersWhoPlacedAHero": [-1],
+    "misc": "MDliOTZhMjRLSXpJflNFd1BOfHtMe0t+UE9JTkd7SUpoj4qMfodDYoCGikhahIyFfox2eIN9RFZne419i416X4t9i3uJhYlWfXl0TVB4SnVoj4qMfodDWX95i3c=",
+    "activeKnowledge": "0-4294967295-1073741823-4194303-4194303-8191-32767",
+    "activeRelicKnowledge": null,
+    "replayRecorder": null,
+    "bloonLivesLostOverride": 0,
+    "rogueMapSaveData": null,
+    "playerChallengeId": null,
+    "playerChallengeType": null,
+    "isCreationMode": false,
+    "dailyChallengeEventID": ""
+}
