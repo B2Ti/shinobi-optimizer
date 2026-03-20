@@ -48,7 +48,7 @@ struct Tower {
     pub value: i64,
     pub fvalue: f64,
     pub range: f64,
-    // pub full_data: PlacedTower,
+    pub full_data: PlacedTower,
 }
 
 impl Tower {
@@ -63,7 +63,7 @@ impl Tower {
             value: 9999999,
             fvalue: 9999999.0,
             range,
-            // full_data: tower,
+            full_data: tower,
         }
     }
     pub fn into_nonnegotiable(mut self) -> Self {
@@ -90,9 +90,15 @@ const NORMAL_INIT: bool = true;
 //     (dx * dx + dy * dy).sqrt() < range
 // }
 
-fn tower_is_in_range(tower_1: &Tower, tower_2: &Tower, range: f64) -> bool {
-    let dx = tower_1.pos_x - tower_2.pos_x;
-    let dy = tower_1.pos_y - tower_2.pos_y;
+fn is_in_range(pos_1: (f64, f64), pos_2: (f64, f64), range: f64) -> bool {
+    let dx = pos_1.0 - pos_2.0;
+    let dy = pos_1.1 - pos_2.1;
+    (dx * dx + dy * dy).sqrt() < range
+}
+
+fn tower_is_in_range(tower_1: &PlacedTower, tower_2: &PlacedTower, range: f64) -> bool {
+    let dx = tower_1.position.x - tower_2.position.x;
+    let dy = tower_1.position.y - tower_2.position.y;
     (dx * dx + dy * dy).sqrt() < range
 }
 
@@ -101,7 +107,8 @@ fn get_attack_speed_buff(stack_count: i64) -> f64 {
 }
 
 fn get_pierce_buff(stack_count: i64) -> f64 {
-    1.08 * (stack_count as f64)
+    // 1.0 + 0.08 * (stack_count as f64)
+    1.08 * stack_count as f64
 }
 
 fn get_setup_dps(jitsus: &[Tower], shinobis: &[Tower], id_inrange_lookup: &HashMap<i64, Vec<Tower>>) -> f64 {
@@ -197,7 +204,11 @@ fn game_pos_to_window_pos(pos: (f64, f64)) -> (f64, f64) {
     ((pos.0 * 3.0)+(SIZE.0 / 2.0), (pos.1 * 3.0)+(SIZE.1 / 2.0))
 }
 
-fn render(d: &mut RaylibDrawHandle, shinobis: &[Tower], jitsus: &[Tower], villages: &[Tower], id_inrange_lookup: &HashMap<i64, Vec<Tower>>) {
+// fn window_pos_to_game_pos(pos: (f64, f64)) -> (f64, f64) {
+//     ((pos.0 - (SIZE.0 / 2.0)) / 3.0, (pos.1 - (SIZE.1 / 2.0)) / 3.0)
+// }
+
+fn render(d: &mut RaylibDrawHandle, shinobis: &[Tower], jitsus: &[Tower], villages: &[Tower], id_inrange_lookup: &HashMap<i64, Vec<Tower>>, selected_tower: Option<i64>) {
     d.clear_background(Color::WHITE);
     for shinobi in shinobis {
         let pos = game_pos_to_window_pos((shinobi.pos_x, shinobi.pos_y));
@@ -213,6 +224,30 @@ fn render(d: &mut RaylibDrawHandle, shinobis: &[Tower], jitsus: &[Tower], villag
     }
     let dps = get_setup_dps(jitsus, shinobis, id_inrange_lookup);
     d.draw_text(&format!("{dps}"), 0, 0, 16, Color::BLACK);
+    if let Some(id) = selected_tower {
+        for ninja in shinobis.iter().chain(jitsus) {
+            if id == ninja.id {
+                let pos = game_pos_to_window_pos((ninja.pos_x, ninja.pos_y));
+                d.draw_circle(pos.0 as i32, pos.1 as i32, ninja.range as f32 * 3.0, Color::new(0,0,0,30));
+                let mut stack_count = 0;
+                if ninja.buffable {
+                    for shinobi in shinobis {
+                        if tower_is_in_range(&ninja.full_data, &shinobi.full_data, shinobi.range) {
+                            stack_count += 1;
+                        }
+                    }
+                }
+                if stack_count > 20 {
+                    d.draw_text(&format!("stacks: 20 ({stack_count})"), 0, 16, 16, Color::new(0, 0, 0, 255));
+                } else {
+                    d.draw_text(&format!("stacks: {stack_count}"), 0, 16, 16, Color::new(0, 0, 0, 255));
+                }
+                stack_count = stack_count.min(20);
+                d.draw_text(&format!("base value: {}", ninja.value), 0, 32, 16, Color::new(0,0,0,255));
+                d.draw_text(&format!("value: {}", ninja.value as f64 * get_attack_speed_buff(stack_count) * get_pierce_buff(stack_count)), 0, 48, 16, Color::new(0,0,0,255));
+            }
+        }
+    }
 }
 
 fn main() -> Result<(), Box<dyn Error>> {
@@ -285,7 +320,7 @@ fn main() -> Result<(), Box<dyn Error>> {
         if ninja.path_one_tier == 4 {
             let mut current_range = RANGE_NO_VILLAGE;
             for village in &villages {
-                if tower_is_in_range(&Tower::new(ninja.clone(), 0.0), village, village.range) {
+                if tower_is_in_range(&ninja, &village.full_data, village.range) {
                     current_range = MAX_RANGE;
                     break;
                 }
@@ -300,7 +335,7 @@ fn main() -> Result<(), Box<dyn Error>> {
         if ninja.path_two_tier == 2 {
             let mut current_range = RANGE_NO_VILLAGE;
             for village in &villages {
-                if tower_is_in_range(&Tower::new(ninja.clone(), 0.0), village, village.range) {
+                if tower_is_in_range(&ninja, &village.full_data, village.range) {
                     current_range = MAX_RANGE;
                     break;
                 }
@@ -318,7 +353,7 @@ fn main() -> Result<(), Box<dyn Error>> {
                 let ninja_tower = Tower::new(ninja.clone(), 0.0);
                 if villages
                     .iter()
-                    .any(|v| tower_is_in_range(&ninja_tower, v, v.range))
+                    .any(|v| tower_is_in_range(&ninja_tower.full_data, &v.full_data, v.range))
                 {
                     current_range = MAX_RANGE;
                 }
@@ -329,7 +364,7 @@ fn main() -> Result<(), Box<dyn Error>> {
                 let ninja_tower = Tower::new(ninja.clone(), 0.0);
                 if villages
                     .iter()
-                    .any(|v| tower_is_in_range(&ninja_tower, v, v.range))
+                    .any(|v| tower_is_in_range(&ninja_tower.full_data, &v.full_data, v.range))
                 {
                     current_range = MAX_RANGE;
                 }
@@ -360,7 +395,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     for jitsu in all_ninjas.iter().chain(&villages) {
         let mut lookup_entry = Vec::new();
         for jitsu2 in &all_ninjas {
-            if jitsu.id != jitsu2.id && tower_is_in_range(jitsu2, jitsu, jitsu.range){
+            if jitsu.id != jitsu2.id && tower_is_in_range(&jitsu2.full_data, &jitsu.full_data, jitsu.range){
                 lookup_entry.push(jitsu2.clone());
             }
         }
@@ -371,16 +406,19 @@ fn main() -> Result<(), Box<dyn Error>> {
     {
         let mut lookup_entry = Vec::new();
         for jitsu2 in &all_ninjas {
-            if tower_is_in_range(jitsu2, &ninjagon, ninjagon.range) {
+            if tower_is_in_range(&jitsu2.full_data, &ninjagon.full_data, ninjagon.range) {
                 lookup_entry.push(jitsu2.clone());
             }
         }
         id_inrange_lookup.insert(ninjagon.id, lookup_entry);
     }
 
+    let mut selected_tower: Option<i64> = None;
     let (mut rl, thread) = raylib::init().size(900, 696).title("pop optimizer").build();
+    rl.set_exit_key(None);
     rl.set_target_fps(60);
     while !rl.window_should_close() {
+        let mouse_pos = rl.get_mouse_position();
         let mut d = rl.begin_drawing(&thread);
         if d.is_key_pressed(raylib::ffi::KeyboardKey::KEY_O) {
             let start = std::time::SystemTime::now();
@@ -394,7 +432,18 @@ fn main() -> Result<(), Box<dyn Error>> {
             }
             (jitsus, shinobis) = results;
         }
-        render(&mut d, &shinobis, &jitsus, &villages, &id_inrange_lookup);
+        if d.is_mouse_button_pressed(raylib::ffi::MouseButton::MOUSE_BUTTON_LEFT) {
+            // let pos = window_pos_to_game_pos((mouse_pos.x as f64, mouse_pos.y as f64));
+            selected_tower = None;
+            let pos = (mouse_pos.x as f64, mouse_pos.y as f64);
+            for ninja in shinobis.iter().chain(&jitsus) {
+                let ninja_pos = game_pos_to_window_pos((ninja.pos_x, ninja.pos_y));
+                if is_in_range(pos, ninja_pos, 18.0) {
+                    selected_tower = Some(ninja.id);
+                }
+            }
+        }
+        render(&mut d, &shinobis, &jitsus, &villages, &id_inrange_lookup, selected_tower);
     }
 
     Ok(())
