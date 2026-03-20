@@ -46,7 +46,7 @@ enum TowerType {
 
 #[derive(Clone)]
 struct Tower {
-    pub id: i64,
+    // pub id: i64,
     pub jitsu_value: i32,
     pub shinobi_value: i32,
     pub range: f64,
@@ -60,7 +60,7 @@ struct Tower {
 impl Tower {
     pub fn new(tower: PlacedTower, range: f64) -> Self {
         Self {
-            id: tower.id_last_save,
+            // id: tower.id_last_save,
             pos_x: tower.position.x,
             pos_y: tower.position.y,
             negotiable: true,
@@ -97,24 +97,26 @@ fn tower_is_in_range(tower_1: &Tower, tower_2: &Tower, range: f64) -> bool {
     (dx * dx + dy * dy).sqrt() < range
 }
 
-fn get_attack_speed_buff(stack_count: i64) -> f64 {
-    (1.08f64).powi(stack_count.try_into().unwrap())
+fn get_attack_speed_buff(stack_count: u8) -> f64 {
+    (1.08f64).powi(stack_count.into())
 }
 
-fn get_pierce_buff(stack_count: i64) -> f64 {
+fn get_pierce_buff(stack_count: u8) -> f64 {
     1.0 + 0.08 * (stack_count as f64)
 }
 
-fn get_setup_dps(towers: &[Tower], tower_types: &HashMap<i64, TowerType>, stacks: &HashMap<i64, i64>) -> f64 {
+fn get_setup_dps(towers: &[Tower], tower_types: &[TowerType], stacks: &[u8]) -> f64 {
     let mut setup_dps = 0f64;
-    for ninja in towers {
+    for i in 0..towers.len() {
+        let ninja = &towers[i];
         if ninja.negotiable {
-            let value = if tower_types.get(&ninja.id).is_some_and(|&t| t == TowerType::Shinobi) {
+            let tower_type = tower_types[i];
+            let value = if tower_type == TowerType::Shinobi {
                 ninja.shinobi_value
             } else {
                 ninja.jitsu_value
             };
-            let stack_count = stacks.get(&ninja.id).copied().unwrap_or_default().min(20);
+            let stack_count = stacks[i].min(20);
             let attack_speed_buff = get_attack_speed_buff(stack_count);
             let pierce_buff = get_pierce_buff(stack_count);
             setup_dps += value as f64 * attack_speed_buff * pierce_buff;
@@ -123,39 +125,45 @@ fn get_setup_dps(towers: &[Tower], tower_types: &HashMap<i64, TowerType>, stacks
     setup_dps
 }
 
-fn optimize(towers: &[Tower], tower_types: &HashMap<i64, TowerType>, stacks: &HashMap<i64, i64>) -> (f64, HashMap<i64, TowerType>, HashMap<i64, i64>) {
-    let mut best_improvement = (0f64, tower_types.clone(), stacks.clone());
+fn optimize(towers: &[Tower], tower_types: &[TowerType], stacks: &[u8], inrange_lookup: &[Vec<usize>]) -> (f64, Vec<TowerType>, Vec<u8>) {
+    let mut best_improvement = (0f64, tower_types.to_vec(), stacks.to_vec());
     let base = get_setup_dps(towers, tower_types, stacks);
-    for tower in towers {
+    for i in 0..towers.len() {
+        let tower = &towers[i];
         if !tower.negotiable {
             continue;
         }
-        match tower_types.get(&tower.id) {
-            None => {},
-            Some(TowerType::Other) => {},
-            Some(TowerType::Bloonjitsu) => {
-                let mut new_types = tower_types.clone();
-                let mut new_stacks = stacks.clone();
-                *new_types.get_mut(&tower.id).unwrap() = TowerType::Shinobi;
-                for other in towers {
-                    if tower_is_in_range(other, tower, tower.range) {
-                        *new_stacks.entry(other.id).or_default() += 1;
-                    }
+        match tower_types[i] {
+            TowerType::Other => {},
+            TowerType::Bloonjitsu => {
+                let mut new_types = tower_types.to_vec();
+                let mut new_stacks = stacks.to_vec();
+                new_types[i] = TowerType::Shinobi;
+                for &other in &inrange_lookup[i] {
+                    new_stacks[other] += 1;
                 }
+                // for (j, other) in towers.iter().enumerate() {
+                //     if tower_is_in_range(other, tower, tower.range) {
+                //         new_stacks[j] += 1;
+                //     }
+                // }
                 let dps_change = get_setup_dps(towers, &new_types, &new_stacks) - base;
                 if dps_change > best_improvement.0 {
                     best_improvement = (dps_change, new_types, new_stacks);
                 }
             },
-            Some(TowerType::Shinobi) => {
-                let mut new_types = tower_types.clone();
-                let mut new_stacks = stacks.clone();
-                *new_types.get_mut(&tower.id).unwrap() = TowerType::Bloonjitsu;
-                for other in towers {
-                    if tower_is_in_range(other, tower, tower.range) {
-                        *new_stacks.entry(other.id).or_default() -= 1;
-                    }
+            TowerType::Shinobi => {
+                let mut new_types = tower_types.to_vec();
+                let mut new_stacks = stacks.to_vec();
+                new_types[i] = TowerType::Bloonjitsu;
+                for &other in &inrange_lookup[i] {
+                    new_stacks[other] -= 1;
                 }
+                // for (j, other) in towers.iter().enumerate() {
+                //     if tower_is_in_range(other, tower, tower.range) {
+                //         new_stacks[j] -= 1;
+                //     }
+                // }
                 let dps_change = get_setup_dps(towers, &new_types, &new_stacks) - base;
                 if dps_change > best_improvement.0 {
                     best_improvement = (dps_change, new_types, new_stacks);
@@ -172,45 +180,37 @@ fn game_pos_to_window_pos(pos: (f64, f64)) -> (f64, f64) {
 }
 
 
-fn render(d: &mut RaylibDrawHandle, towers: &[Tower], tower_types: &HashMap<i64, TowerType>, stacks: &HashMap<i64, i64>, selected_tower: Option<i64>) {
+fn render(d: &mut RaylibDrawHandle, towers: &[Tower], tower_types: &[TowerType], stacks: &[u8], selected_tower: Option<usize>) {
     d.clear_background(Color::WHITE);
-    for tower in towers {
+    for (i, tower) in towers.iter().enumerate() {
         let pos = game_pos_to_window_pos((tower.pos_x, tower.pos_y));
-        let (radius, colour) = match tower_types.get(&tower.id) {
-            None | Some(TowerType::Other) => (33.0, Color::new(0, 200, 200, 255)),
-            Some(TowerType::Shinobi) => (18.0, Color::new(0, 200, 0, 255)),
-            Some(TowerType::Bloonjitsu) => (18.0, Color::new(200, 200, 0, 255)),
+        let (radius, colour) = match tower_types[i] {
+            TowerType::Other => (33.0, Color::new(0, 200, 200, 255)),
+            TowerType::Shinobi => (18.0, Color::new(0, 200, 0, 255)),
+            TowerType::Bloonjitsu => (18.0, Color::new(200, 200, 0, 255)),
         };
         d.draw_circle(pos.0 as i32, pos.1 as i32, radius, colour);
     }
-    let dps = get_setup_dps(towers, tower_types, stacks);
+    let dps = get_setup_dps(towers, tower_types, stacks).round();
     d.draw_text(&format!("{dps}"), 0, 0, 16, Color::BLACK);
-    if let Some(id) = selected_tower {
-        for tower in towers {
-            if id == tower.id {
-                let value_mult = if tower_types.get(&tower.id).is_some_and(|&t| t == TowerType::Shinobi) {
-                    0.07
-                } else {
-                    1.0
-                };
-                let pos = game_pos_to_window_pos((tower.pos_x, tower.pos_y));
-                d.draw_circle(pos.0 as i32, pos.1 as i32, tower.range as f32 * 3.0, Color::new(0,0,0,30));
-                let mut stack_count = stacks.get(&tower.id).copied().unwrap_or_default();
-                if stack_count > 20 {
-                    d.draw_text(&format!("stacks: 20 ({stack_count})"), 0, 16, 16, Color::new(0, 0, 0, 255));
-                } else {
-                    d.draw_text(&format!("stacks: {stack_count}"), 0, 16, 16, Color::new(0, 0, 0, 255));
-                }
-                let value = if tower_types.get(&tower.id).is_some_and(|&t| t == TowerType::Bloonjitsu) {
-                    tower.jitsu_value
-                } else {
-                    tower.shinobi_value
-                };
-                stack_count = stack_count.min(20);
-                d.draw_text(&format!("base value: {}", value), 0, 32, 16, Color::new(0,0,0,255));
-                d.draw_text(&format!("value: {}", value as f64 * get_attack_speed_buff(stack_count) * get_pierce_buff(stack_count) * value_mult), 0, 48, 16, Color::new(0,0,0,255));
-            }
+    if let Some(index) = selected_tower {
+        let tower = &towers[index];
+        let pos = game_pos_to_window_pos((tower.pos_x, tower.pos_y));
+        d.draw_circle(pos.0 as i32, pos.1 as i32, tower.range as f32 * 3.0, Color::new(0,0,0,30));
+        let mut stack_count = stacks[index];
+        if stack_count > 20 {
+            d.draw_text(&format!("stacks: 20 ({stack_count})"), 0, 16, 16, Color::new(0, 0, 0, 255));
+        } else {
+            d.draw_text(&format!("stacks: {stack_count}"), 0, 16, 16, Color::new(0, 0, 0, 255));
         }
+        let value = if tower_types[index] == TowerType::Bloonjitsu {
+            tower.jitsu_value
+        } else {
+            tower.shinobi_value
+        };
+        stack_count = stack_count.min(20);
+        d.draw_text(&format!("base value: {}", value), 0, 32, 16, Color::new(0,0,0,255));
+        d.draw_text(&format!("value: {}", value as f64 * get_attack_speed_buff(stack_count) * get_pierce_buff(stack_count)), 0, 48, 16, Color::new(0,0,0,255));
     }
 }
 
@@ -228,13 +228,13 @@ fn main() -> Result<(), Box<dyn Error>> {
     let villages: Vec<_> = actual_setup.placed_towers.iter().filter(|tower| tower.base_id == "MonkeyVillage").map(|tower| Tower::new(tower.clone(), if tower.path_one_tier == 5 {VILLAGE_RANGE} else {HOMELAND_RANGE}).into_nonnegotiable().into_unbuffable()).collect();
     
     let mut towers = Vec::new();
-    let mut types = HashMap::new();
+    let mut types = Vec::new();
     for tower in actual_setup.placed_towers {
         if tower.base_id == "NinjaMonkey" {
             let jitsu_value = jitsu_pop_lookup.get(&tower.id_last_save).copied().unwrap_or_default();
             let shinobi_value = shinobi_pop_lookup.get(&tower.id_last_save).copied().unwrap_or_default();
             if tower.path_one_tier == 6 {
-                types.insert(tower.id_last_save, TowerType::Shinobi);
+                types.push(TowerType::Shinobi);
                 towers.push(Tower::new(tower, NINJAGON_RANGE).into_nonnegotiable().into_unbuffable());
             } else if (4..=5).contains(&tower.path_one_tier) {
                 let mut jitsu = Tower::new(tower, 0.0).with_values(jitsu_value.try_into().unwrap(), shinobi_value.try_into().unwrap());
@@ -247,7 +247,7 @@ fn main() -> Result<(), Box<dyn Error>> {
                     RANGE_NO_VILLAGE
                 };
                 jitsu.range = range;
-                types.insert(jitsu.id, TowerType::Bloonjitsu);
+                types.push(TowerType::Bloonjitsu);
                 towers.push(jitsu);
             } else if tower.path_two_tier >= 3 {
                 let mut shinobi = Tower::new(tower, 0.0).with_values(jitsu_value.try_into().unwrap(), shinobi_value.try_into().unwrap());
@@ -260,23 +260,25 @@ fn main() -> Result<(), Box<dyn Error>> {
                     RANGE_NO_VILLAGE
                 };
                 shinobi.range = range;
-                types.insert(shinobi.id, TowerType::Shinobi);
+                types.push(TowerType::Shinobi);
                 towers.push(shinobi);
             }
         } else if tower.base_id == "MonkeyVillage" {
             let range = if tower.path_one_tier == 5 {VILLAGE_RANGE} else {HOMELAND_RANGE};
-            types.insert(tower.id_last_save, TowerType::Other);
+            types.push(TowerType::Other);
             towers.push(Tower::new(tower, range).into_nonnegotiable().into_unbuffable());
         }
     }
 
-    let mut stacks = HashMap::new();
+    let mut stacks = vec![0; towers.len()];
+    let mut inrange_lookup = vec![Vec::new(); towers.len()];
 
-    for tower in &towers {
-        if types.get(&tower.id).is_some_and(|&t| t == TowerType::Shinobi) {
-            for other in &towers {
-                if tower_is_in_range(other, tower, tower.range) {
-                    *stacks.entry(other.id).or_default() += 1;
+    for (i, tower) in towers.iter().enumerate() {
+        for (j, other) in towers.iter().enumerate() {
+            if tower_is_in_range(other, tower, tower.range) {
+                inrange_lookup[i].push(j);
+                if types[i] == TowerType::Shinobi {
+                    stacks[j] += 1;
                 }
             }
         }
@@ -388,7 +390,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     //     id_inrange_lookup.insert(ninjagon.id, lookup_entry);
     // }
 
-    let mut selected_tower: Option<i64> = None;
+    let mut selected_tower: Option<usize> = None;
     let (mut rl, thread) = raylib::init().size(900, 696).title("pop optimizer").build();
     rl.set_exit_key(None);
     rl.set_target_fps(60);
@@ -399,7 +401,7 @@ fn main() -> Result<(), Box<dyn Error>> {
             let start = std::time::SystemTime::now();
             println!("Lets OPTIMISE!");
             let score;
-            (score, types, stacks) = optimize(&towers, &types, &stacks);
+            (score, types, stacks) = optimize(&towers, &types, &stacks, &inrange_lookup);
             println!("optimisation score: {score}");
             let end = std::time::SystemTime::now();
             match end.duration_since(start) {
@@ -411,10 +413,10 @@ fn main() -> Result<(), Box<dyn Error>> {
             // let pos = window_pos_to_game_pos((mouse_pos.x as f64, mouse_pos.y as f64));
             selected_tower = None;
             let pos = (mouse_pos.x as f64, mouse_pos.y as f64);
-            for ninja in &towers {
+            for (i, ninja) in towers.iter().enumerate() {
                 let ninja_pos = game_pos_to_window_pos((ninja.pos_x, ninja.pos_y));
                 if is_in_range(pos, ninja_pos, 18.0) {
-                    selected_tower = Some(ninja.id);
+                    selected_tower = Some(i);
                 }
             }
         }
