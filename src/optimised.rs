@@ -125,51 +125,56 @@ fn get_setup_dps(towers: &[Tower], tower_types: &[TowerType], stacks: &[u8]) -> 
     setup_dps
 }
 
-fn optimize(towers: &[Tower], tower_types: &[TowerType], stacks: &[u8], inrange_lookup: &[Vec<usize>]) -> (f64, Vec<TowerType>, Vec<u8>) {
-    let mut best_improvement = (0f64, tower_types.to_vec(), stacks.to_vec());
+fn optimize(towers: &[Tower], inrange_lookup: &[Vec<usize>], tower_types: &[TowerType], stacks: &[u8], depth: u8) -> (f64, Vec<TowerType>, Vec<u8>) {
     let base = get_setup_dps(towers, tower_types, stacks);
+    let mut best_improvement = (base, tower_types.to_vec(), stacks.to_vec());
     for i in 0..towers.len() {
         let tower = &towers[i];
         if !tower.negotiable {
             continue;
         }
-        match tower_types[i] {
-            TowerType::Other => {},
+        let new_shinobi = match tower_types[i] {
+            TowerType::Other => {
+                continue;
+            },
             TowerType::Bloonjitsu => {
-                let mut new_types = tower_types.to_vec();
-                let mut new_stacks = stacks.to_vec();
-                new_types[i] = TowerType::Shinobi;
-                for &other in &inrange_lookup[i] {
-                    new_stacks[other] += 1;
-                }
-                // for (j, other) in towers.iter().enumerate() {
-                //     if tower_is_in_range(other, tower, tower.range) {
-                //         new_stacks[j] += 1;
-                //     }
-                // }
-                let dps_change = get_setup_dps(towers, &new_types, &new_stacks) - base;
-                if dps_change > best_improvement.0 {
-                    best_improvement = (dps_change, new_types, new_stacks);
-                }
+                true
             },
             TowerType::Shinobi => {
-                let mut new_types = tower_types.to_vec();
-                let mut new_stacks = stacks.to_vec();
-                new_types[i] = TowerType::Bloonjitsu;
-                for &other in &inrange_lookup[i] {
-                    new_stacks[other] -= 1;
-                }
-                // for (j, other) in towers.iter().enumerate() {
-                //     if tower_is_in_range(other, tower, tower.range) {
-                //         new_stacks[j] -= 1;
-                //     }
-                // }
-                let dps_change = get_setup_dps(towers, &new_types, &new_stacks) - base;
-                if dps_change > best_improvement.0 {
-                    best_improvement = (dps_change, new_types, new_stacks);
-                }
+                false
+            }
+        };
+            
+        let mut new_types = tower_types.to_vec();
+        let mut new_stacks = stacks.to_vec();
+        if new_shinobi {
+            new_types[i] = TowerType::Shinobi;
+            for &other in &inrange_lookup[i] {
+                new_stacks[other] += 1;
+            }
+        } else {
+            new_types[i] = TowerType::Bloonjitsu;
+            for &other in &inrange_lookup[i] {
+                new_stacks[other] -= 1;
             }
         }
+        if depth == 0 {
+        // let dps = if depth == 0 {
+            let dps = get_setup_dps(towers, &new_types, &new_stacks);
+            if dps > best_improvement.0 {
+                best_improvement = (dps, new_types, new_stacks);
+            }
+            // get_setup_dps(towers, &new_types, &new_stacks)
+        } else {
+            let (dps, new_types, new_stacks) = optimize(towers, inrange_lookup, &new_types, &new_stacks, depth - 1);
+            if dps > best_improvement.0 {
+                best_improvement = (dps, new_types, new_stacks);
+            }
+            // optimize(towers, inrange_lookup, &new_types, &new_stacks, depth - 1).0
+        };
+        // if dps > best_improvement.0 {
+        //     best_improvement = (dps, new_types, new_stacks);
+        // }
     }
     best_improvement
 }
@@ -401,7 +406,7 @@ fn main() -> Result<(), Box<dyn Error>> {
             let start = std::time::SystemTime::now();
             println!("Lets OPTIMISE!");
             let score;
-            (score, types, stacks) = optimize(&towers, &types, &stacks, &inrange_lookup);
+            (score, types, stacks) = optimize(&towers, &inrange_lookup, &types, &stacks, 2);
             println!("optimisation score: {score}");
             let end = std::time::SystemTime::now();
             match end.duration_since(start) {
