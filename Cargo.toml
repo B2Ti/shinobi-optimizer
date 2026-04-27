@@ -2,7 +2,7 @@
 name = "shinobi-optimizer"
 version = "0.1.0"
 edition = "2021"
-default_run = "optim"
+default-run = "optim"
 
 [dependencies]
 serde = { version = "1.0", features = ["derive"] }
