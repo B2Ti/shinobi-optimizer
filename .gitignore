@@ -1,5 +1,9 @@
 /target
 /test
 
+# Profiling data
+*.svg
+perf.data*
+
 .DS_Store
 .venv
