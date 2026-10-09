@@ -251,10 +251,11 @@ fn render(d: &mut RaylibDrawHandle, shinobis: &[Tower], jitsus: &[Tower], villag
 }
 
 fn main() -> Result<(), Box<dyn Error>> {
-    let setup = read_json("Logs_FreeplaySetupPops.json")?;
-    let actual_setup = read_json("Logs_FreeplaySetup.json")?;
-    let setup_shinobis = read_json("Logs_FreeplaySetupPopsShi.json")?;
-    let setup_old = read_json("Logs_FreeplaySetup.json")?;
+    let setup_dir = "setups/logs_freeplay/";
+    let setup = read_json([setup_dir, "pops.json"].join("")).unwrap();
+    let actual_setup = read_json([setup_dir, "actual.json"].join(""))?;
+    let setup_shinobis = read_json([setup_dir, "pops_shinobi.json"].join("")).unwrap();
+    let setup_old = read_json([setup_dir, "actual.json"].join("")).unwrap();
     let setup: Freeplay = serde_json::from_value(setup)?;
     let actual_setup: Freeplay = serde_json::from_value(actual_setup)?;
     let setup_shinobis: Freeplay = serde_json::from_value(setup_shinobis)?;
