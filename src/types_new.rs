@@ -17,6 +17,7 @@ pub struct Freeplay {
     pub game_version: String,
     pub health: f64,
     pub shield: f64,
+    #[serde(default)]
     pub extra_shield: f64,
     pub has_taken_leak_damage_last_round: bool,
     pub claimed_freeplay_loot: bool,
@@ -58,6 +59,7 @@ pub struct Freeplay {
     pub players_who_placed_ahero: Vec<i64>,
     pub misc: String,
     pub active_knowledge: String,
+    #[serde(default)]
     pub active_perks: String,
     pub active_relic_knowledge: Value,
     pub replay_recorder: Value,
@@ -118,7 +120,9 @@ pub struct PlacedTower {
     pub created_on_round: i64,
     pub lives_gained: f64,
     pub pops: i64,
+    #[serde(default)]
     pub is_attacking_disabled: bool,
+    #[serde(default)]
     pub are_abilities_disabled: bool,
 }
 
@@ -419,6 +423,7 @@ pub struct PlacedProjectile {
     pub is_power_projectile: bool,
     pub power_id: Value,
     pub created_at: i64,
+    #[serde(default)]
     pub weapon_id: i64,
 }
 
@@ -455,29 +460,29 @@ pub struct EmittedFrom {
 pub struct MapEventSaveData {
     #[serde(rename = "$type")]
     pub type_field: String,
-    #[serde(rename = "RemovingOre1")]
+    #[serde(rename = "RemovingOre1", default)]
     pub removing_ore1: RemovingOre1,
-    #[serde(rename = "Ore1")]
+    #[serde(rename = "Ore1", default)]
     pub ore1: Ore1,
-    #[serde(rename = "RemovingOre2")]
+    #[serde(rename = "RemovingOre2", default)]
     pub removing_ore2: RemovingOre2,
-    #[serde(rename = "Ore2")]
+    #[serde(rename = "Ore2", default)]
     pub ore2: Ore2,
-    #[serde(rename = "RemovingOre3")]
+    #[serde(rename = "RemovingOre3", default)]
     pub removing_ore3: RemovingOre3,
-    #[serde(rename = "Ore3")]
+    #[serde(rename = "Ore3", default)]
     pub ore3: Ore3,
-    #[serde(rename = "RemovingOre4")]
+    #[serde(rename = "RemovingOre4", default)]
     pub removing_ore4: RemovingOre4,
-    #[serde(rename = "Ore4")]
+    #[serde(rename = "Ore4", default)]
     pub ore4: Ore4,
-    #[serde(rename = "RemovingOre5")]
+    #[serde(rename = "RemovingOre5", default)]
     pub removing_ore5: RemovingOre5,
-    #[serde(rename = "Ore5")]
+    #[serde(rename = "Ore5", default)]
     pub ore5: Ore5,
-    #[serde(rename = "RemovingOre6")]
+    #[serde(rename = "RemovingOre6", default)]
     pub removing_ore6: RemovingOre6,
-    #[serde(rename = "Ore6")]
+    #[serde(rename = "Ore6", default)]
     pub ore6: Ore6,
 }
 
@@ -1012,49 +1017,49 @@ pub struct TowerHistory {
 pub struct TowerMaxBaseIdAtAtime {
     #[serde(rename = "$type")]
     pub type_field: String,
-    #[serde(rename = "SuperMonkey")]
+    #[serde(rename = "SuperMonkey", default)]
     pub super_monkey: i64,
-    #[serde(rename = "MonkeyAce")]
+    #[serde(rename = "MonkeyAce", default)]
     pub monkey_ace: i64,
-    #[serde(rename = "SpikeFactory")]
+    #[serde(rename = "SpikeFactory", default)]
     pub spike_factory: i64,
-    #[serde(rename = "Mermonkey")]
+    #[serde(rename = "Mermonkey", default)]
     pub mermonkey: i64,
-    #[serde(rename = "NinjaMonkey")]
+    #[serde(rename = "NinjaMonkey", default)]
     pub ninja_monkey: i64,
-    #[serde(rename = "Druid")]
+    #[serde(rename = "Druid", default)]
     pub druid: i64,
-    #[serde(rename = "TackShooter")]
+    #[serde(rename = "TackShooter", default)]
     pub tack_shooter: i64,
-    #[serde(rename = "BombShooter")]
+    #[serde(rename = "BombShooter", default)]
     pub bomb_shooter: i64,
-    #[serde(rename = "DartlingGunner")]
+    #[serde(rename = "DartlingGunner", default)]
     pub dartling_gunner: i64,
-    #[serde(rename = "Alchemist")]
+    #[serde(rename = "Alchemist", default)]
     pub alchemist: i64,
-    #[serde(rename = "HeliPilot")]
+    #[serde(rename = "HeliPilot", default)]
     pub heli_pilot: i64,
-    #[serde(rename = "MonkeyBuccaneer")]
+    #[serde(rename = "MonkeyBuccaneer", default)]
     pub monkey_buccaneer: i64,
-    #[serde(rename = "BoomerangMonkey")]
+    #[serde(rename = "BoomerangMonkey", default)]
     pub boomerang_monkey: i64,
-    #[serde(rename = "EngineerMonkey")]
+    #[serde(rename = "EngineerMonkey", default)]
     pub engineer_monkey: i64,
-    #[serde(rename = "WizardMonkey")]
+    #[serde(rename = "WizardMonkey", default)]
     pub wizard_monkey: i64,
-    #[serde(rename = "MonkeyVillage")]
+    #[serde(rename = "MonkeyVillage", default)]
     pub monkey_village: i64,
-    #[serde(rename = "Etienne")]
+    #[serde(rename = "Etienne", default)]
     pub etienne: i64,
-    #[serde(rename = "Desperado")]
+    #[serde(rename = "Desperado", default)]
     pub desperado: i64,
-    #[serde(rename = "MonkeySub")]
+    #[serde(rename = "MonkeySub", default)]
     pub monkey_sub: i64,
-    #[serde(rename = "IceMonkey")]
+    #[serde(rename = "IceMonkey", default)]
     pub ice_monkey: i64,
-    #[serde(rename = "SniperMonkey")]
+    #[serde(rename = "SniperMonkey", default)]
     pub sniper_monkey: i64,
-    #[serde(rename = "GlueGunner")]
+    #[serde(rename = "GlueGunner", default)]
     pub glue_gunner: i64,
 }
 
@@ -1065,7 +1070,7 @@ pub struct ActiveMutators {
     pub type_field: String,
     #[serde(rename = "Overclock")]
     pub overclock: Vec<Overclock>,
-    #[serde(rename = "TakeAim")]
+    #[serde(rename = "TakeAim", default)]
     pub take_aim: Vec<TakeAim>,
     #[serde(rename = "Ultraboost")]
     pub ultraboost: Vec<Ultraboost>,

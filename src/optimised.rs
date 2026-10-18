@@ -206,27 +206,6 @@ fn get_damage_buff(stack_count: u8) -> f64 {
         18 => const { get_damage_buff2(18) },
         19 => const { get_damage_buff2(19) },
         _ => const { get_damage_buff2(20) },
-        // 0 => 1.000000000000000000000,
-        // 1 => 1.166400000000000103384,
-        // 2 => 1.353024000000000004462,
-        // 3 => 1.562042880000000133478,
-        // 4 => 1.795845427200000399282,
-        // 5 => 2.057059307520000768221,
-        // 6 => 2.348573997957120962354,
-        // 7 => 2.673565859296052504845,
-        // 8 => 3.035525544862287539161,
-        // 9 => 3.438287958619625328538,
-        // 10 => 3.886064995091018658968,
-        // 11 => 4.383481314462668976262,
-        // 12 => 4.935613428965201165965,
-        // 13 => 5.548032401375578182012,
-        // 14 => 6.226850483426237481410,
-        // 15 => 6.978772051236198592505,
-        // 16 => 7.811149226801826550570,
-        // 17 => 8.732042609330042282068,
-        // 18 => 9.750287578011239020270,
-        // 19 => 10.875566668981717199927,
-        // _ => 12.118488574008202007803,
     }
 }
 
@@ -241,9 +220,6 @@ fn get_setup_dps(towers: &[Tower], tower_types: &[TowerType], stacks: &[u8]) -> 
             } else {
                 ninja.jitsu_value
             };
-            // let stack_count = stacks[i].min(20);
-            // let attack_speed_buff = get_attack_speed_buff(stack_count);
-            // let pierce_buff = get_pierce_buff(stack_count);
             let damage_buff = get_damage_buff(stacks[i]);
             setup_dps += value as f64 * damage_buff;
         }
@@ -254,7 +230,6 @@ fn get_setup_dps(towers: &[Tower], tower_types: &[TowerType], stacks: &[u8]) -> 
 static DPS_CALCS: AtomicUsize = AtomicUsize::new(0);
 
 fn get_sim_setup_dps(towers: &[SimTower], tower_types: &[TowerType], stacks: &[u8]) -> f64 {
-    // DPS_CALCS.fetch_add(1, std::sync::atomic::Ordering::Relaxed);
     let mut setup_dps = 0f64;
     for i in 0..towers.len() {
         let ninja = &towers[i];
@@ -287,23 +262,13 @@ fn calc_stacks(towers: &[Tower], tower_types: &[TowerType]) -> Vec<u8> {
 }
 
 fn full_calc_dps(towers: &[Tower], tower_types: &[TowerType]) -> f64 {
-    // let mut stacks = vec![0; towers.len()];
-    // for (i, tower) in towers.iter().enumerate() {
-    //     if tower_types[i] == TowerType::Shinobi {
-    //         for (j, other) in towers.iter().enumerate() {
-    //             if tower_is_in_range(other, tower, tower.range) {
-    //                 stacks[j] += 1;
-    //             }
-    //         }
-    //     }
-    // }
     let stacks = calc_stacks(towers, tower_types);
     get_setup_dps(towers, tower_types, &stacks)
 }
 
 fn rand_optimize(
     towers: &[SimTower],
-    inrange_lookup: &[Vec<u8>],
+    inrange_lookup: &[Vec<bool>],
     base_types: &[TowerType],
 ) -> (f64, Vec<TowerType>, Vec<u8>) {
     let nbits: usize = towers.iter().map(|t| t.negotiable as usize).sum();
@@ -322,7 +287,7 @@ fn rand_optimize(
             } else {
                 new_types[j] = TowerType::Shinobi;
                 for (r, s) in inrange_lookup[i].iter().zip(stacks.iter_mut()) {
-                    *s += *r;
+                    *s += (*r) as u8;
                 }
             }
             i += 1;
@@ -333,7 +298,7 @@ fn rand_optimize(
 
 fn max_optimize(
     towers: &[SimTower],
-    inrange_lookup: &[Vec<u8>],
+    inrange_lookup: &[Vec<bool>],
     tower_types: &[TowerType],
     stacks: &[u8],
     depth: u8,
@@ -353,7 +318,7 @@ fn max_optimize(
 
 fn optimize(
     towers: &[SimTower],
-    inrange_lookup: &[Vec<u8>],
+    inrange_lookup: &[Vec<bool>],
     tower_types: &[TowerType],
     stacks: &[u8],
     depth: u8,
@@ -375,12 +340,12 @@ fn optimize(
         if new_shinobi {
             new_types[i] = TowerType::Shinobi;
             for (r, s) in inrange_lookup[i].iter().zip(new_stacks.iter_mut()) {
-                *s += *r;
+                *s += (*r) as u8;
             }
         } else {
             new_types[i] = TowerType::Bloonjitsu;
             for (r, s) in inrange_lookup[i].iter().zip(new_stacks.iter_mut()) {
-                *s -= *r;
+                *s -= (*r) as u8;
             }
         }
         if depth == 0 {
@@ -399,74 +364,9 @@ fn optimize(
     best_improvement
 }
 
-// fn optimize_n_inner<const N: usize>(towers: &[Tower; N], inrange_lookup: &[[u8; N]; N], tower_types: [TowerType; N], stacks: [u8; N], depth: u8) -> (f64, [TowerType; N], [u8; N]) {
-//     let base = get_setup_dps(towers, &tower_types, &stacks);
-//     let mut best_improvement = (base, tower_types.clone(), stacks.clone());
-//     for i in 0..towers.len() {
-//         let tower = &towers[i];
-//         if !tower.negotiable {
-//             continue;
-//         }
-//         let new_shinobi = match tower_types[i] {
-//             TowerType::Other => {
-//                 continue;
-//             },
-//             TowerType::Bloonjitsu => {
-//                 true
-//             },
-//             TowerType::Shinobi => {
-//                 false
-//             }
-//         };
-
-//         let mut new_types = tower_types.clone();
-//         let mut new_stacks = stacks.clone();
-//         if new_shinobi {
-//             new_types[i] = TowerType::Shinobi;
-//             for (r, s) in inrange_lookup[i].iter().zip(new_stacks.iter_mut()) {
-//                 *s += *r;
-//             }
-//         } else {
-//             new_types[i] = TowerType::Bloonjitsu;
-//             for (r, s) in inrange_lookup[i].iter().zip(new_stacks.iter_mut()) {
-//                 *s -= *r;
-//             }
-//         }
-//         if depth == 0 {
-//             let dps = get_setup_dps(towers, &new_types, &new_stacks);
-//             if dps > best_improvement.0 {
-//                 best_improvement = (dps, new_types, new_stacks);
-//             }
-//         } else {
-//             let (dps, new_types, new_stacks) = optimize_n_inner(towers, inrange_lookup, new_types, new_stacks, depth - 1);
-//             if dps > best_improvement.0 {
-//                 best_improvement = (dps, new_types, new_stacks);
-//             }
-//         };
-//     }
-//     best_improvement
-// }
-
-// fn optimize_n(towers: &[Tower], inrange_lookup: &[Vec<u8>], tower_types: &[TowerType], stacks: &[u8], depth: u8) -> Result<(f64, Vec<TowerType>, Vec<u8>), TryFromSliceError> {
-//     const N: usize = 142;
-//     // safety: Fuckass stdlib making all their error types private js let me return a TryFromSliceError when trying to make something from a slice fails in my own way
-//     // Both types are ZST that do nothing except tell the compiler which functions you can call "with" it
-//     let towers: [Tower; N] = towers[..N].to_vec().try_into().map_err(|_| unsafe {std::mem::transmute::<(), TryFromSliceError>(())})?;
-//     // let inrange_lookup: Vec<_> = inrange_lookup.iter().map(|e| TryInto::<[u8; N]>::try_into(&e[..N]).unwrap()).collect();
-//     let mut range_lookup = Vec::new();
-//     for lookup in inrange_lookup {
-//         range_lookup.push(TryInto::<[u8; N]>::try_into(&lookup[..N])?);
-//     }
-//     let inrange_lookup: [[u8; N]; N] = range_lookup[..N].try_into()?;
-//     let tower_types: [TowerType; N] = tower_types[..N].try_into()?;
-//     let stacks: [u8; N] = stacks.try_into()?;
-//     let results = optimize_n_inner(&towers, &inrange_lookup, tower_types, stacks, depth);
-//     Ok((results.0, results.1.to_vec(), results.2.to_vec()))
-// }
-
 fn optimize_25(
     towers: &[Tower],
-    inrange_lookup: &[Vec<u8>],
+    inrange_lookup: &[Vec<bool>],
     tower_types: &[TowerType],
     stacks: &[u8],
     depth: u8,
@@ -489,12 +389,12 @@ fn optimize_25(
         if new_shinobi {
             new_types[i] = TowerType::Shinobi;
             for (r, s) in inrange_lookup[i].iter().zip(new_stacks.iter_mut()) {
-                *s += *r;
+                *s += (*r) as u8;
             }
         } else {
             new_types[i] = TowerType::Bloonjitsu;
             for (r, s) in inrange_lookup[i].iter().zip(new_stacks.iter_mut()) {
-                *s -= *r;
+                *s -= (*r) as u8;
             }
         }
         let dps = get_setup_dps(towers, &new_types, &new_stacks);
@@ -536,10 +436,8 @@ fn tabu_get_neighbors(towers: &[Tower], tower_types: &[TowerType]) -> Vec<Vec<To
 
 fn tabu_search(
     towers: &[Tower],
-    // inrange_lookup: &[Vec<u8>],
     tower_types: &[TowerType],
     tabu_tenure: usize,
-    // stacks: &[u8],
     depth: usize,
 ) -> Vec<TowerType> {
     let mut best_sol = tower_types.to_vec();
@@ -556,13 +454,11 @@ fn tabu_search(
             .collect::<Vec<_>>();
         neighbours.sort_by(|(_, d1), (_, d2)| {
             // Reverse sort: highest score first.
-            // full_calc_dps(towers, n2).total_cmp(&full_calc_dps(towers, n1))
             d2.total_cmp(d1)
         });
         let mut best_canditate = None;
         for (candidate, dps) in neighbours.clone() {
             let is_tabu = tabu_list.get(&candidate).copied().unwrap_or_default() > i;
-            // let dps = full_calc_dps(towers, &candidate);
             let is_best = dps > current_best_dps;
             if !is_tabu || is_best {
                 best_canditate = Some((candidate, dps));
@@ -577,12 +473,10 @@ fn tabu_search(
                 .expect("expected state to have neighbors")
                 .clone()
         });
-        // let dps = full_calc_dps(towers, &current_sol);
         if dps > current_best_dps {
             best_sol = current_sol.clone();
             current_best_dps = dps;
         }
-        // tabu_list[&current_sol] = i + tabu_tenure;
         tabu_list.insert(current_sol.clone(), i + tabu_tenure);
     }
     best_sol
@@ -590,7 +484,7 @@ fn tabu_search(
 
 fn optimize_thread(
     towers: &[SimTower],
-    inrange_lookup: &[Vec<u8>],
+    inrange_lookup: &[Vec<bool>],
     tower_types: &[TowerType],
     stacks: &[u8],
     depth: u8,
@@ -615,12 +509,12 @@ fn optimize_thread(
         if new_shinobi {
             new_types[i] = TowerType::Shinobi;
             for (r, s) in inrange_lookup[i].iter().zip(new_stacks.iter_mut()) {
-                *s += *r;
+                *s += (*r) as u8;
             }
         } else {
             new_types[i] = TowerType::Bloonjitsu;
             for (r, s) in inrange_lookup[i].iter().zip(new_stacks.iter_mut()) {
-                *s -= *r;
+                *s -= (*r) as u8;
             }
         }
         states.push((new_types, new_stacks));
@@ -628,7 +522,6 @@ fn optimize_thread(
     let results = apply_threads::apply_threads(
         12,
         |(towers, inrange_lookup, tower_types, stacks, depth), _| {
-            // optimize_n(towers, inrange_lookup, tower_types, stacks, depth).unwrap()
             optimize(towers, inrange_lookup, tower_types, stacks, depth)
         },
         &states
@@ -645,38 +538,9 @@ fn optimize_thread(
         .clone()
 }
 
-// fn change_tower(towers: &[Tower], inrange_lookup: &[Vec<u8>], tower_types: &mut [TowerType], stacks: &mut [u8], i: usize) {
-//     let tower = &towers[i];
-//     if !tower.negotiable {
-//         return;
-//     }
-//     let new_shinobi = match tower_types[i] {
-//         TowerType::Other => {
-//             return;
-//         },
-//         TowerType::Bloonjitsu => {
-//             true
-//         },
-//         TowerType::Shinobi => {
-//             false
-//         }
-//     };
-//     if new_shinobi {
-//         tower_types[i] = TowerType::Shinobi;
-//         for (r, s) in inrange_lookup[i].iter().zip(stacks.iter_mut()) {
-//             *s += *r;
-//         }
-//     } else {
-//         tower_types[i] = TowerType::Bloonjitsu;
-//         for (r, s) in inrange_lookup[i].iter().zip(stacks.iter_mut()) {
-//             *s -= *r;
-//         }
-//     }
-// }
-
 fn optimize_mut_inner(
     towers: &[Tower],
-    inrange_lookup: &[Vec<u8>],
+    inrange_lookup: &[Vec<bool>],
     tower_types: &mut [TowerType],
     stacks: &mut [u8],
     depth: u8,
@@ -694,12 +558,12 @@ fn optimize_mut_inner(
         if new_shinobi {
             tower_types[i] = TowerType::Shinobi;
             for (r, s) in inrange_lookup[i].iter().zip(stacks.iter_mut()) {
-                *s += *r;
+                *s += (*r) as u8;
             }
         } else {
             tower_types[i] = TowerType::Bloonjitsu;
             for (r, s) in inrange_lookup[i].iter().zip(stacks.iter_mut()) {
-                *s -= *r;
+                *s -= (*r) as u8;
             }
         }
         if depth == 0 {
@@ -716,12 +580,12 @@ fn optimize_mut_inner(
         if new_shinobi {
             tower_types[i] = TowerType::Bloonjitsu;
             for (r, s) in inrange_lookup[i].iter().zip(stacks.iter_mut()) {
-                *s -= *r;
+                *s -= (*r) as u8;
             }
         } else {
             tower_types[i] = TowerType::Shinobi;
             for (r, s) in inrange_lookup[i].iter().zip(stacks.iter_mut()) {
-                *s += *r;
+                *s += (*r) as u8;
             }
         }
     }
@@ -730,7 +594,7 @@ fn optimize_mut_inner(
 
 fn optimize_mut(
     towers: &[Tower],
-    inrange_lookup: &[Vec<u8>],
+    inrange_lookup: &[Vec<bool>],
     tower_types: &mut [TowerType],
     stacks: &mut [u8],
     depth: u8,
@@ -749,12 +613,12 @@ fn optimize_mut(
         if new_shinobi {
             tower_types[i] = TowerType::Shinobi;
             for (r, s) in inrange_lookup[i].iter().zip(stacks.iter_mut()) {
-                *s += *r;
+                *s += (*r) as u8;
             }
         } else {
             tower_types[i] = TowerType::Bloonjitsu;
             for (r, s) in inrange_lookup[i].iter().zip(stacks.iter_mut()) {
-                *s -= *r;
+                *s -= (*r) as u8;
             }
         }
         if depth == 0 {
@@ -773,12 +637,12 @@ fn optimize_mut(
         if new_shinobi {
             tower_types[i] = TowerType::Bloonjitsu;
             for (r, s) in inrange_lookup[i].iter().zip(stacks.iter_mut()) {
-                *s -= *r;
+                *s -= (*r) as u8;
             }
         } else {
             tower_types[i] = TowerType::Shinobi;
             for (r, s) in inrange_lookup[i].iter().zip(stacks.iter_mut()) {
-                *s += *r;
+                *s += (*r) as u8;
             }
         }
     }
@@ -787,13 +651,13 @@ fn optimize_mut(
             TowerType::Bloonjitsu => {
                 tower_types[i] = TowerType::Shinobi;
                 for (r, s) in inrange_lookup[i].iter().zip(stacks.iter_mut()) {
-                    *s += *r;
+                    *s += (*r) as u8;
                 }
             }
             TowerType::Shinobi => {
                 tower_types[i] = TowerType::Bloonjitsu;
                 for (r, s) in inrange_lookup[i].iter().zip(stacks.iter_mut()) {
-                    *s -= *r;
+                    *s -= (*r) as u8;
                 }
             }
         };
@@ -940,16 +804,6 @@ fn render(
             Color::new(0, 0, 0, 30),
         );
     }
-    // if let Some(index) = selected_tower {
-    //     let tower = &towers[index];
-    //     let pos = game_pos_to_window_pos((tower.pos_x, tower.pos_y));
-    //     d.draw_circle(
-    //         pos.0 as i32,
-    //         pos.1 as i32,
-    //         tower.range as f32 * 3.0,
-    //         Color::new(0, 0, 0, 30),
-    //     );
-    // }
 }
 
 fn main() -> Result<(), Box<dyn Error>> {
@@ -968,7 +822,6 @@ fn main() -> Result<(), Box<dyn Error>> {
         return Ok(());
     };
     
-    // let setup_dir = "setups/big_setup/";
     let pops_jitsu: Value = read_json(setup_dir.join("pops.json"))?;
     let pops_shinobi: Value = read_json(setup_dir.join("pops_shinobi.json"))?;
     let actual_setup: Value = read_json(setup_dir.join("actual.json"))?;
@@ -1030,8 +883,7 @@ fn main() -> Result<(), Box<dyn Error>> {
                         .into_nonnegotiable()
                         .into_unbuffable(),
                 );
-            } else if !(4..=5).contains(&tower.path_one_tier) {
-                // else if ![2, 3, 4, 5, 6, 7, 8, 15, 16, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 35, 42, 44, 45, 50, 51, 53, 57, 58, 59, 60, 61, 66, 67, 68, 69, 71, 74, 75, 76, 83, 88, 89, 90, 91, 92, 93, 94, 99, 100, 101, 102, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 120, 129, 133, 134, 135, 138, 139].contains(&tower_index) {
+            } else if (4..=5).contains(&tower.path_one_tier) {
                 let mut jitsu = Tower::new(&tower, 0.0).with_values(
                     jitsu_value.try_into().unwrap(),
                     shinobi_value.try_into().unwrap(),
@@ -1052,7 +904,6 @@ fn main() -> Result<(), Box<dyn Error>> {
                 types.push(TowerType::Bloonjitsu);
                 towers.push(jitsu);
             } else {
-                // } else {
                 let mut shinobi = Tower::new(&tower, 0.0).with_values(
                     jitsu_value.try_into().unwrap(),
                     shinobi_value.try_into().unwrap(),
@@ -1073,149 +924,25 @@ fn main() -> Result<(), Box<dyn Error>> {
                 types.push(TowerType::Shinobi);
                 towers.push(shinobi);
             }
-            // tower_index += 1;
         }
-        // else if tower.base_id == "MonkeyVillage" {
-        //     let range = if tower.path_one_tier == 5 {
-        //         VILLAGE_RANGE
-        //     } else {
-        //         HOMELAND_RANGE
-        //     };
-        //     types.push(TowerType::Other);
-        //     towers.push(
-        //         Tower::new(&tower, range)
-        //             .into_nonnegotiable()
-        //             .into_unbuffable(),
-        //     );
-        // }
     }
     println!("[INFO] towers.len: {}", towers.len());
 
     let mut stacks = vec![0; towers.len()];
-    let mut inrange_lookup = vec![vec![0; towers.len()]; towers.len()];
+    let mut inrange_lookup = vec![vec![false; towers.len()]; towers.len()];
 
     for (i, tower) in towers.iter().enumerate() {
         for (j, other) in towers.iter().enumerate() {
             if tower_is_in_range(other, tower, tower.range) {
-                inrange_lookup[i][j] = 1;
+                inrange_lookup[i][j] = true;
                 if types[i] == TowerType::Shinobi {
                     stacks[j] += 1;
                 }
-                // inrange_lookup[i].push(j);
-                // if types[i] == TowerType::Shinobi {
-                //     stacks[j] += 1;
-                // }
             }
         }
     }
 
     let sim_towers: Vec<SimTower> = towers.iter().map(Into::into).collect();
-
-    // let ninjagon = setup_old
-    //     .placed_towers
-    //     .iter()
-    //     .find(|tower| tower.base_id == "NinjaMonkey" && tower.path_one_tier == 6)
-    //     .unwrap()
-    //     .clone();
-
-    // let mut jitsus: Vec<Tower> = Vec::new();
-    // let mut shinobis: Vec<Tower> = vec![
-    //     Tower::new(ninjagon, NINJAGON_RANGE)
-    //         .into_nonnegotiable()
-    //         .into_unbuffable(),
-    // ];
-    // let towers = setup.placed_towers;
-    // let towers_2 = setup_shinobis.placed_towers;
-    // let actual_towers = actual_setup.placed_towers;
-
-    // let mut ninjas = Vec::new();
-    // let mut ninjas_2 = Vec::new();
-    // let mut ninjas_actual = Vec::new();
-
-    // for tower in towers {
-    //     if tower.base_id == "NinjaMonkey" {
-    //         ninjas.push(tower)
-    //     } else if tower.base_id == "MonkeyVillage" {
-    //         if tower.path_one_tier == 5 {
-    //             villages.push(
-    //                 Tower::new(tower, VILLAGE_RANGE)
-    //                     .into_nonnegotiable()
-    //                     .into_unbuffable(),
-    //             );
-    //         } else {
-    //             villages.push(
-    //                 Tower::new(tower, HOMELAND_RANGE)
-    //                     .into_nonnegotiable()
-    //                     .into_unbuffable(),
-    //             );
-    //         }
-    //     }
-    // }
-
-    // for tower in towers_2 {
-    //     if tower.base_id == "NinjaMonkey" {
-    //         ninjas_2.push(tower);
-    //     }
-    // }
-    // for tower in actual_towers {
-    //     if tower.base_id == "NinjaMonkey" {
-    //         ninjas_actual.push(tower);
-    //     }
-    // }
-
-    // let mut jitsu_id_values: HashMap<i64, i64> = HashMap::new();
-    // let mut shinobi_id_values: HashMap<i64, i64> = HashMap::new();
-
-    // for ninja in ninjas_actual {
-    //     if ninja.path_one_tier >= 4 && ninja.path_one_tier < 6 {
-    //         let mut current_range = RANGE_NO_VILLAGE;
-    //         let ninja_tower = Tower::new(ninja.clone(), 0.0);
-    //         if villages
-    //             .iter()
-    //             .any(|v| tower_is_in_range(&ninja_tower, v, v.range))
-    //         {
-    //             current_range = MAX_RANGE;
-    //         }
-    //         let value = *jitsu_id_values.get(&ninja.id_last_save).unwrap();
-    //         jitsus.push(Tower::new(ninja, current_range).with_value(value));
-    //     } else if ninja.path_two_tier >= 3 {
-    //         let mut current_range = RANGE_NO_VILLAGE;
-    //         let ninja_tower = Tower::new(ninja.clone(), 0.0);
-    //         if villages
-    //             .iter()
-    //             .any(|v| tower_is_in_range(&ninja_tower, v, v.range))
-    //         {
-    //             current_range = MAX_RANGE;
-    //         }
-    //         let value = *shinobi_id_values.get(&ninja.id_last_save).unwrap();
-    //         shinobis.push(Tower::new(ninja, current_range).with_value(value));
-    //     }
-    // }
-
-    // let all_ninjas = [jitsus.as_slice(), shinobis.as_slice()].concat();
-
-    // let mut id_inrange_lookup = HashMap::new();
-
-    // for jitsu in all_ninjas.iter().chain(&villages) {
-    //     let mut lookup_entry = Vec::new();
-    //     for jitsu2 in &all_ninjas {
-    //         if jitsu.id != jitsu2.id && tower_is_in_range(jitsu2, jitsu, jitsu.range){
-    //             lookup_entry.push(jitsu2.clone());
-    //         }
-    //     }
-    //     id_inrange_lookup.insert(jitsu.id, lookup_entry);
-    // }
-
-    // let ninjagon = shinobis[0].clone();
-    // {
-    //     let mut lookup_entry = Vec::new();
-    //     for jitsu2 in &all_ninjas {
-    //         if tower_is_in_range(jitsu2, &ninjagon, ninjagon.range) {
-    //             lookup_entry.push(jitsu2.clone());
-    //         }
-    //     }
-    //     id_inrange_lookup.insert(ninjagon.id, lookup_entry);
-    // }
 
     let mut selected_tower = SelectedTower::None;
     let (mut rl, thread) = raylib::init().size(900, 696).title("pop optimizer").build();
@@ -1225,6 +952,7 @@ fn main() -> Result<(), Box<dyn Error>> {
         let mouse_pos = rl.get_mouse_position();
         let mut d = rl.begin_drawing(&thread);
         if d.is_key_pressed(KeyboardKey::KEY_F) {
+            let mut start = std::time::SystemTime::now();
             let mut prev_score = 0.0;
             let mut score;
             (score, types, stacks) =
@@ -1245,13 +973,22 @@ fn main() -> Result<(), Box<dyn Error>> {
                 drop(d);
                 rl.window_should_close();
                 d = rl.begin_drawing(&thread);
+                let end = std::time::SystemTime::now();
+                match end.duration_since(start) {
+                    Ok(duration) => {
+                        println!("New score {score} in {}s", duration.as_secs_f64())
+                    }
+                    Err(_) => {
+                        println!("Optimising took < 0s??");
+                    }
+                }
+                start = end;
             }
         }
         if d.is_key_pressed(KeyboardKey::KEY_O) {
             let start = std::time::SystemTime::now();
             println!("Lets OPTIMISE!");
             let score;
-            // (score, types, stacks) = optimize(&sim_towers, &inrange_lookup, &types, &stacks, 2);
             (score, types, stacks) =
                 optimize_thread(&sim_towers, &inrange_lookup, &types, &stacks, optim_level);
             println!("optimisation score: {score}");
@@ -1284,8 +1021,6 @@ fn main() -> Result<(), Box<dyn Error>> {
         if d.is_key_pressed(KeyboardKey::KEY_T) {
             let start = std::time::SystemTime::now();
             println!("Lets OPTIMISE!");
-            // let score;
-            // (score, types, stacks) = optimize_25(&towers, &inrange_lookup, &types, &stacks, 3);
             types = tabu_search(&towers, &types, 5, 100);
             stacks = calc_stacks(&towers, &types);
             let score = get_setup_dps(&towers, &types, &stacks);
@@ -1341,13 +1076,10 @@ fn main() -> Result<(), Box<dyn Error>> {
                 Err(_) => 0.0,
             };
             println!("optimized in {duration}s optimisation score: {score}");
-            // if score > get_setup_dps(&towers, &types, &stacks) {
             types = new_types;
             stacks = new_stacks;
-            // }
         }
         if d.is_mouse_button_pressed(raylib::ffi::MouseButton::MOUSE_BUTTON_LEFT) {
-            // let pos = window_pos_to_game_pos((mouse_pos.x as f64, mouse_pos.y as f64));
             selected_tower = SelectedTower::None;
             let pos = (mouse_pos.x as f64, mouse_pos.y as f64);
             if let Some(etienne) = &etienne {
@@ -1379,6 +1111,5 @@ fn main() -> Result<(), Box<dyn Error>> {
             selected_tower,
         );
     }
-
     Ok(())
 }
